@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <string.h>
+
+union Addr {
+    char name[40];
+    char home[120];
+    char hostel[120];
+    char city[40];
+    char state[40];
+    char zip[20];
+};
+
+int main() {
+    union Addr me;
+
+    /* Put present address into home */
+    strcpy(me.home, "123, Green Park, Near Lake, Cityname - 400001");
+
+    printf("Present address:\n%s\n", me.home);
+
+    return 0;
+}
