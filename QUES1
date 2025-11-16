@@ -1,0 +1,62 @@
+#include <stdio.h>
+
+typedef struct {
+    float real;
+    float imag;
+} Complex;
+
+/* read complex number from stdin */
+void readC(Complex *c) {
+    printf("Enter real: ");
+    scanf("%f", &c->real);
+    printf("Enter imag: ");
+    scanf("%f", &c->imag);
+}
+
+/* print complex number in a + bi form */
+void printC(Complex c) {
+    if (c.imag >= 0)
+        printf("%.2f + %.2fi\n", c.real, c.imag);
+    else
+        printf("%.2f - %.2fi\n", c.real, -c.imag);
+}
+
+/* add two complex numbers */
+Complex addC(Complex a, Complex b) {
+    Complex r;
+    r.real = a.real + b.real;
+    r.imag = a.imag + b.imag;
+    return r;
+}
+
+/* subtract b from a */
+Complex subC(Complex a, Complex b) {
+    Complex r;
+    r.real = a.real - b.real;
+    r.imag = a.imag - b.imag;
+    return r;
+}
+
+int main() {
+    Complex x, y, sum, diff;
+
+    printf("First complex:\n");
+    readC(&x);
+
+    printf("Second complex:\n");
+    readC(&y);
+
+    printf("\nYou entered:\n");
+    printC(x);
+    printC(y);
+
+    sum = addC(x, y);
+    diff = subC(x, y);
+
+    printf("\nSum: ");
+    printC(sum);
+    printf("Difference: ");
+    printC(diff);
+
+    return 0;
+}
