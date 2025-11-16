@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct {
+    int id;
+    char title[80];
+    char author[50];
+    float price;
+} Book;
+
+void printBook(Book b) {
+    printf("ID     : %d\n", b.id);
+    printf("Title  : %s\n", b.title);
+    printf("Author : %s\n", b.author);
+    printf("Price  : %.2f\n", b.price);
+}
+
+int main() {
+    Book b;
+    char temp;
+
+    printf("Enter book id: ");
+    if (scanf("%d", &b.id) != 1) return 1;
+    temp = getchar(); /* eat newline */
+
+    printf("Enter title: ");
+    fgets(b.title, sizeof(b.title), stdin);
+    if (b.title[strlen(b.title)-1] == '\n') b.title[strlen(b.title)-1] = '\0';
+
+    printf("Enter author: ");
+    fgets(b.author, sizeof(b.author), stdin);
+    if (b.author[strlen(b.author)-1] == '\n') b.author[strlen(b.author)-1] = '\0';
+
+    printf("Enter price: ");
+    if (scanf("%f", &b.price) != 1) return 1;
+
+    printf("\nBook details:\n");
+    printBook(b);
+
+    return 0;
+}
