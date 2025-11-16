@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100
+#define NAMELEN 50
+
+typedef struct {
+    char name[NAMELEN];
+    float basic;
+    float gross;
+} Emp;
+
+void computeGross(Emp *e) {
+    float da = 0.52f * e->basic;
+    e->gross = e->basic + da;
+}
+
+int main() {
+    Emp list[MAX];
+    int n, i;
+    char temp;
+
+    printf("How many employees (max %d)? ", MAX);
+    if (scanf("%d", &n) != 1) return 1;
+    if (n < 1 || n > MAX) return 1;
+    temp = getchar(); /* eat newline */
+
+    for (i = 0; i < n; i++) {
+        printf("\nName of employee %d: ", i+1);
+        fgets(list[i].name, NAMELEN, stdin);
+        /* remove newline */
+        size_t len = strlen(list[i].name);
+        if (len > 0 && list[i].name[len-1] == '\n') list[i].name[len-1] = '\0';
+
+        printf("Basic pay: ");
+        if (scanf("%f", &list[i].basic) != 1) return 1;
+        temp = getchar(); /* eat newline */
+        computeGross(&list[i]);
+    }
+
+    printf("\nEmployee    : Gross Salary\n");
+    printf("---------------------------\n");
+    for (i = 0; i < n; i++) {
+        printf("%-20s : %.2f\n", list[i].name, list[i].gross);
+    }
+
+    return 0;
+}
